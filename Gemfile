@@ -46,5 +46,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "awesome_print", require: "ap" # for rails console
 gem 'devise'
-gem 'graphql'
 gem 'jwt'
+gem 'interactor'
+gem 'graphql'
