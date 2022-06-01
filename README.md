@@ -22,3 +22,25 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+# Instructions to enable Rubocop as Linter
+
+* Uncomment rubocop gems declaration from Gemfile
+
+* Create a file named .rubocop.yml in project directory with this config:
+
+require:
+  - rubocop
+  - rubocop-rails
+
+AllCops:
+  EnabledByDefault: true
+
+Style/Copyright:
+  Description: 'Include a copyright notice in each file before any code.'
+  Enabled: false
+  VersionAdded: '0.30'
+  Notice: '^Copyright (\(c\) )?2[0-9]{3} .+'
+  AutocorrectNotice: ''
+
+* Enable rubocop extension in your code editor to pick real time code offenses
