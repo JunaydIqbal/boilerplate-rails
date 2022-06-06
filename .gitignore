@@ -28,3 +28,6 @@
 
 # Ignore code editor config files
 .idea
+
+# Ignore code coverage reports by simplecov gem
+/coverage
