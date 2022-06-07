@@ -79,7 +79,14 @@ RSpec.describe DeviseResources::GenerateToken do
           
           expect(payload["role"]).to eql("user")
           expect(enc_algorithm["alg"]).to eql("HS256")
-        end        
+        end
+
+        it "should rescue StandardError for #generate_token" do
+          allow(token_interactor).to receive(:payload).and_raise(StandardError, "Bad payload!")
+          expect{ token_interactor.send(:generate_token) }.to raise_error(StandardError)
+          expect(token_interactor.context.error).to eq("Bad payload!")
+          expect(token_interactor.context).not_to be_a_success
+        end
       end
     end
   end
