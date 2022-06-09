@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe DeviseResources::GenerateToken do
   context "Constants" do
     it "should have #SECRET_KEY" do
@@ -39,8 +41,8 @@ RSpec.describe DeviseResources::GenerateToken do
         end
 
         it "should have implemented #generate_token, #expiration_limit, #expiry_time, #payload" do
-          %i(generate_token expiration_limit expiry_time payload).each do |attr|
-            expect(@token_interactor.respond_to?(attr, true)).to eq(true)
+          %i(generate_token expiration_limit expiry_time payload).each do |method|
+            expect(@token_interactor.respond_to?(method, true)).to eq(true)
           end
         end
       end
