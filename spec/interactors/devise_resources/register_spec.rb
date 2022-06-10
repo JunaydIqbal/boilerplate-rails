@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe DeviseResources::Register do
   context "Methods" do
-    let(:register_obj) { described_class.new(resource_params: attributes_for(:user)) }
+    let(:register_obj) { described_class.new(resource_params: attributes_for(:user), klass: 'User') }
     let(:user) { build(:user) }
     let(:resource) { register_obj.send(:initialize_resource) }
+    let(:resource_name) { register_obj.send(:resource_name) }
     let(:set_resource) { register_obj.instance_variable_set(:@resource, resource) }
     let(:set_token_interactor) { register_obj.instance_variable_set(:@token_interactor, register_obj.send(:generate_token)) }
 
@@ -54,6 +55,10 @@ RSpec.describe DeviseResources::Register do
           expect(response).to be_instance_of(String)
         end
 
+        it "should check #resource_name", skip_resource: true, skip_token: true do
+          expect(resource_name).to eql(register_obj.context.klass.downcase)
+        end
+
         it "should fail the context for #check_token_response!", skip_resource: true do
           allow(register_obj.instance_variable_get(:@token_interactor)).to receive(:success?).and_return(false)
           expect { register_obj.send(:check_token_response!) }.to raise_error(Interactor::Failure)
@@ -61,7 +66,7 @@ RSpec.describe DeviseResources::Register do
 
         it "should check #persist_resource_and_respond" do
           response = register_obj.send(:persist_resource_and_respond)
-          expect(register_obj.context.resource.persisted?).to be(true)
+          expect(register_obj.context[resource_name].persisted?).to be(true)
         end
 
         it "should should fail the context for #persist_resource_and_respond", skip_token: true do

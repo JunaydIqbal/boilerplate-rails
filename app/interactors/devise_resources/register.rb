@@ -7,6 +7,10 @@ module DeviseResources
 
     private
 
+      def resource_name
+        context.klass.downcase
+      end
+
       def initialize_resource
         # Uncomment and adjust the code below for multiple devise models
         # context.klass == "Customer" ? 
@@ -28,7 +32,7 @@ module DeviseResources
 
       def persist_resource_and_respond
         if @resource.save
-          context.resource = @resource
+          context[resource_name] = @resource
           @token_interactor = generate_token
           check_token_response!
         else
