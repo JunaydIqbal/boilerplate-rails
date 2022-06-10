@@ -1,5 +1,6 @@
+require 'rails_helper'
+
 RSpec.describe Mutations::Users::RegisterUser do
-  
   context "Arguments" do
     it "should validate existence of #registerAttributes" do
       expect(described_class.arguments).to include("registerAttributes")
@@ -14,4 +15,44 @@ RSpec.describe Mutations::Users::RegisterUser do
     end
   end
 
+  context "Methods" do
+    describe "Private Methods" do
+      it "should respond to :register_user" do
+        expect(described_class.private_instance_methods).to include(:register_user)
+      end      
+    end
+  end
+  
+
+  context ".resolve" do
+    let(:mutation) do
+      <<~GQL
+      mutation {
+        registerUser(
+          input: {
+            registerAttributes: {
+              email: "user@example.com",
+              password: "admin123",
+              passwordConfirmation: "admin123"
+            }
+          }
+        ) {
+          token
+          user {
+            id
+            email
+          }
+        }
+      }
+      GQL
+    end
+
+    subject(:result) do
+      GraphqlBoilerplateSchema.execute(mutation)
+    end
+
+    it "should resolve the mutation and return #user and #token" do
+      puts result.inspect
+    end    
+  end
 end
