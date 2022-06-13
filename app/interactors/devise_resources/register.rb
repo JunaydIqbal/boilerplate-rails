@@ -21,7 +21,7 @@ module DeviseResources
 
 
       def generate_token
-        DeviseResources::GenerateToken.call(resource: @resource)
+        DeviseResources::GenerateToken.call(resource: @resource, remember_me: context.resource_params[:remember_me])
       end
 
       def check_token_response!
