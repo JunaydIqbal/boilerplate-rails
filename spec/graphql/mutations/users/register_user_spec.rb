@@ -52,7 +52,9 @@ RSpec.describe Mutations::Users::RegisterUser do
     end
 
     it "should resolve the mutation and return #user and #token" do
-      puts result.inspect
+      expect(result.dig("data", "registerUser", "token")).not_to be_nil
+      expect(result.dig("data", "registerUser", "user", "id")).not_to be_nil
+      expect(result.dig("data", "registerUser", "user", "email")).to eq("user@example.com")
     end    
   end
 end
