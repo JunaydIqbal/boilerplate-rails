@@ -27,8 +27,7 @@ RSpec.describe DeviseResources::Login do
 
     describe "Private" do
       describe "Existence" do
-        it "should have implemented #initialize_resource, #generate_token, 
-          #check_token_response!, #persist_resource_and_respond" do
+        it "should have implemented #grab_resource, #resource_name and #authenticate!" do
           %i(grab_resource authenticate!).each do |method|
             expect(login_obj.respond_to?(method, true)).to be(true)
           end
@@ -45,10 +44,15 @@ RSpec.describe DeviseResources::Login do
           expect(resource.email).to eql('john@example.com')
         end
 
+        it "should check #resource_name" do
+          expect(login_obj.send(:resource_name)).to eql(login_obj.context.klass.downcase)
+        end
+
         it "should check #authenticate!" do
           result = login_obj.send(:authenticate!)
           
           expect(login_obj.context.success?).to be(true)
+          expect(login_obj.context.user).to eq(user)
           expect(result).to be_instance_of(String)
         end
 

@@ -11,6 +11,10 @@ module DeviseResources
 
     private
 
+      def resource_name
+        context.klass.downcase
+      end
+
       def grab_resource
         # Uncomment and adjust the code below for multiple devise models
         # @resource = context.klass == "Customer" ? 
@@ -31,7 +35,7 @@ module DeviseResources
 
       def authenticate!
         if @resource && @resource.valid_password?(context.resource_params[:password])
-          context.resource = @resource
+          context[resource_name] = @resource
           @token_result = DeviseResources::GenerateToken.call(resource: @resource, remember_me: context.remember_me)
           if @token_result.success?
             context.token = @token_result.token
