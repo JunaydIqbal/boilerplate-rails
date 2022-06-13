@@ -9,6 +9,7 @@ module Types
       
       argument :password, String, required: true
       argument :password_confirmation, String, required: true
+      argument :remember_me, Boolean, required: true
     end
   end
 end
