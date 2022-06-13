@@ -36,7 +36,7 @@ module DeviseResources
       def authenticate!
         if @resource && @resource.valid_password?(context.resource_params[:password])
           context[resource_name] = @resource
-          @token_result = DeviseResources::GenerateToken.call(resource: @resource, remember_me: context.remember_me)
+          @token_result = DeviseResources::GenerateToken.call(resource: @resource, remember_me: context.resource_params[:remember_me])
           if @token_result.success?
             context.token = @token_result.token
           else

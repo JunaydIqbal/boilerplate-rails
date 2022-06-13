@@ -34,7 +34,8 @@ RSpec.describe Mutations::Users::LoginUser do
           input: {
             loginAttributes: {
               email: "#{user.email}",
-              password: "admin123"
+              password: "admin123",
+              rememberMe: false
             }
           }
         ) {
