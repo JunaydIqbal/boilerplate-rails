@@ -7,4 +7,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum role: %i[admin user]
+
+  has_one_attached :image
 end
