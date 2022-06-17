@@ -33,7 +33,8 @@ RSpec.describe Mutations::Users::RegisterUser do
             registerAttributes: {
               email: "user@example.com",
               password: "admin123",
-              passwordConfirmation: "admin123"
+              passwordConfirmation: "admin123",
+              rememberMe: false
             }
           }
         ) {
