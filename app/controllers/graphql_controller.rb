@@ -14,7 +14,9 @@ class GraphqlController < ApplicationController
       # Query context goes here, for example:
       # current_user: current_user,
     }
-    result = GraphqlBoilerplateSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+    @context = {}
+    attach_current_resource_to_context if token && decoded_token
+    result = GraphqlBoilerplateSchema.execute(query, variables: variables, context: @context, operation_name: operation_name)
     render json: result
   rescue StandardError => e
     raise e unless Rails.env.development?
@@ -48,5 +50,15 @@ class GraphqlController < ApplicationController
     logger.error e.backtrace.join("\n")
 
     render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
+  end
+
+  def attach_current_resource_to_context
+    # Use conditional logic provided below if you have multiple devise models
+    # Make sure to embed role inside payload first (generate_token.rb - #payload)
+    # if decoded_token.first["role"] == "customer"
+    #   @context.merge!({ current_customer: current_customer })
+    # else
+    @context.merge!({ current_user: current_user })
+    # end
   end
 end
