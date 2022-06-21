@@ -8,6 +8,8 @@ module Types
       field :phone_no, String, null: false
       field :role, String, null: false
       field :image_url, String, null: true
+      field :revoke_access, Boolean, null: false
+      field :deleted, Boolean, null: false
 
       def image_url
         if object.image.attached?

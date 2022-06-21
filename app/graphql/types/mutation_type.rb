@@ -5,6 +5,7 @@ module Types
     field :login_user, mutation: Mutations::Users::LoginUser
     field :update_user, mutation: Mutations::Users::UpdateUser
     field :destroy_user, mutation: Mutations::Users::DestroyUser
+    field :modify_access_user, mutation: Mutations::Users::ModifyAccessUser
     # TODO: remove me
     # field :test_field, String, null: false,
     #   description: "An example field added by the generator"
