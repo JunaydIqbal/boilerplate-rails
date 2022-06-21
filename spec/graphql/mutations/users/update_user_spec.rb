@@ -44,9 +44,9 @@ RSpec.describe Mutations::Users::UpdateUser do
       ::ApolloUploadServer::Wrappers::UploadedFile.new(
         ActionDispatch::Http::UploadedFile.new(
           filename: "1634631002642",
-          type: "image/jpeg",
+          type: "image/png",
           tempfile: File.new(
-            "spec/support/files/1634631002642.jpeg"
+            "spec/support/files/data_scientist_interview.png"
           )
         )
       )
