@@ -9,4 +9,15 @@ class User < ApplicationRecord
   enum role: %i[admin user]
 
   has_one_attached :image
+
+  def self.search(query)
+    if query.present?
+      where("
+        email ILIKE? OR first_name ILIKE? OR last_name ILIKE? OR phone_no ILIKE?", 
+        "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%"
+      ).limit(10)
+    else
+      all
+    end
+  end
 end
