@@ -11,6 +11,17 @@ module Types
       field :revoke_access, Boolean, null: false
       field :deleted, Boolean, null: false
 
+      field :invitation_accepted, Boolean, null: false
+      field :raw_invitation_token, String, null: false
+
+      def invitation_accepted
+        object.invitation_accepted?
+      end
+
+      def raw_invitation_token
+        object.raw_invitation_token
+      end
+
       def image_url
         if object.image.attached?
           Rails.application.routes
