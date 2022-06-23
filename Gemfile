@@ -31,6 +31,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'shoulda-matchers', '~> 5.0'
+  gem 'simplecov', require: false
   # gem 'rubocop', require: false
   # gem 'rubocop-rails', require: false
 end
@@ -48,5 +49,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'awesome_print', require: 'ap' # for rails console
 gem 'devise'
 gem 'jwt'
-gem 'interactor'
+gem "interactor", "~> 3.0"
 gem 'graphql'
