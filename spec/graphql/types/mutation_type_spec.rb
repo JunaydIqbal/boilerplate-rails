@@ -5,7 +5,8 @@ RSpec.describe Types::MutationType do
   let(:fields_mapper) do
     {
       'registerUser' => Mutations::Users::RegisterUser,
-      'loginUser' => Mutations::Users::LoginUser
+      'loginUser' => Mutations::Users::LoginUser,
+      'updateUser' => Mutations::Users::UpdateUser
     }
   end
   

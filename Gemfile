@@ -51,3 +51,4 @@ gem 'devise'
 gem 'jwt'
 gem "interactor", "~> 3.0"
 gem 'graphql'
+gem 'apollo_upload_server', '2.1.0'
