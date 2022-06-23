@@ -52,3 +52,4 @@ gem 'jwt'
 gem "interactor", "~> 3.0"
 gem 'graphql'
 gem 'apollo_upload_server', '2.1.0'
+gem 'aws-sdk-s3', '~> 1'
