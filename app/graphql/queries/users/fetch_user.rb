@@ -3,12 +3,12 @@ module Queries
     class FetchUser < Queries::BaseQuery
       include AuthenticableApiUser
 
-      argument :id, ID, required: true
+      argument :id, ID, required: false
 
       type Types::Users::ObjectType, null: false
 
       def resolve(**params)
-        User.find(params[:id])
+        params[:id].present? ? User.find(params[:id]) : context[:current_user]
       rescue ActiveRecord::RecordNotFound => e
         execution_error(message: e.message)
       rescue => e
