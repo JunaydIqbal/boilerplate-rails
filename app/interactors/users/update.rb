@@ -7,7 +7,7 @@ module Users
       unless check_old_password_is_same?
         @user.update!(context.user_params.except(:image))
       else
-        context.fail!(message: "Your password is same with previous!")
+        context.fail!(error: "Your password is same with previous!")
       end
       # if @user.created_by_invite? && !@user.invitation_accepted?
       #   send_email_invitation!
