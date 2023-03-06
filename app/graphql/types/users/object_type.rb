@@ -3,7 +3,7 @@ module Types
     class ObjectType < Types::BaseObject
       field :id, ID, null: false
       field :email, String, null: false
-      field :full_name, String, null: false
+      field :full_name, String, null: true
       field :first_name, String, null: false
       field :last_name, String, null: false
       field :phone_no, String, null: false

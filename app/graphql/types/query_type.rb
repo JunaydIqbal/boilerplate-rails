@@ -6,7 +6,6 @@ module Types
 
     field :all_users, resolver: Queries::Users::AllUsers
     field :fetch_user, resolver: Queries::Users::FetchUser
-    field :search_users, resolver: Queries::Users::SearchUsers
 
     # Add root-level fields here.
     # They will be entry points for queries on your schema.

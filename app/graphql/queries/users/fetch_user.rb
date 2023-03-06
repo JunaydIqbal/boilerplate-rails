@@ -8,11 +8,7 @@ module Queries
       type Types::Users::ObjectType, null: false
 
       def resolve(**params)
-        unless params[:id]
-          context[:current_user]
-        else
-          User.find(params[:id])
-        end
+        params[:id].present? ? User.find(params[:id]) : context[:current_user]
       rescue ActiveRecord::RecordNotFound => e
         execution_error(message: e.message)
       rescue => e
