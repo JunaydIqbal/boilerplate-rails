@@ -4,7 +4,7 @@ module Users
     def call
       @user = User.find(context.user_id)
       @user.image = generate_blob! if context.user_params[:image].present?
-      authenticated_via_password? ? context.fail!(error: "Invalid operation: The new password cannot be the same as the old password") : @user.update!(context.user_params.except(:image))
+      authenticated_via_old_password? ? context.fail!(error: "Invalid operation: The new password cannot be the same as the old password") : @user.update!(context.user_params.except(:image))
       # if @user.created_by_invite? && !@user.invitation_accepted?
       #   send_email_invitation!
       # end
@@ -32,7 +32,7 @@ module Users
         )
       end
 
-      def authenticated_via_password?
+      def authenticated_via_old_password?
         @user.valid_password? (new_password_provided?) if new_password_provided?
       end
   end
