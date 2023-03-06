@@ -5,7 +5,7 @@ RSpec.describe DeviseResources::Login do
     let(:login_obj) do 
       described_class.new(
         resource_params: attributes_for(:user).except(
-          :id, :password_confirmation, :first_name, :last_name
+          :id, :password_confirmation, :first_name, :last_name, :full_name
         ), klass: 'User'
       )
     end

@@ -6,7 +6,7 @@ module Types
           with: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         }
       }
-      
+      argument :full_name, String, required: false
       argument :password, String, required: true
       argument :password_confirmation, String, required: true
     end
