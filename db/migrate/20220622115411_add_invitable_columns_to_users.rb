@@ -1,4 +1,4 @@
-class AddInvitableColumnsToUsers < ActiveRecord::Migration[6.0]
+class AddInvitableColumnsToUsers < ActiveRecord::Migration[7.0]
   def change
     add_column :users, :invitation_token, :string
     add_column :users, :invitation_created_at, :datetime
