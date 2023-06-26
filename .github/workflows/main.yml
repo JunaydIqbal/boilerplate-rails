@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push: 
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    services:
+      db:
+        image: postgres:12
+        ports: ['5432:5432']
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.152.0
+        with:
+          ruby-version: 3.2.2
+      
+      - name: Run Tests
+        env: 
+          DATABASE_URL: postgres//postgres:@localhost:5432/pathsync_development
+        run: |
+          sudo apt install -yqq libpq-dev
+          gem install bundler
+          bundle install
+          bundle exec rails db:prepare
+          bundle exec rspec spec
