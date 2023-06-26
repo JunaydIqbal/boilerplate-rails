@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Types::Users::ProfileAttributes do
   context "Config" do
     it "should check for parent class" do
-      expect(described_class.superclass).to eql(Types::Users::BaseAttributes) 
+      expect(described_class.superclass).to eql(Types::Users::UpdateAttributes) 
     end
   end
 
