@@ -9,12 +9,12 @@ on:
 jobs:
   test:
     services:
-      postgres:
+      postgresql:
         image: postgres:12
         ports: ['5432:5432']
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: moiz
+          POSTGRES_PASSWORD: "" 
           POSTGRES_DB: pathsync_test
 
     runs-on: ubuntu-latest
