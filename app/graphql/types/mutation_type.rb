@@ -11,6 +11,10 @@ module Types
     field :resend_invitation, mutation: Mutations::Users::ResendInvitation
     field :set_password, mutation: Mutations::Users::SetPassword
     field :send_reset_password_instructions, mutation: Mutations::Users::SendResetPasswordInstructions
+    
+    # Mutations for RSpec tests
+    field :order_generator, mutation: Mutations::Support::OrderGenerator if Rails.env.test?
+
     # TODO: remove me
     # field :test_field, String, null: false,
     #   description: "An example field added by the generator"
