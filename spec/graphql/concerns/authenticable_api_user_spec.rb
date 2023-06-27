@@ -11,10 +11,12 @@ RSpec.describe AuthenticableApiUser do
 
   context "Methods" do
     it "should check #ready?" do
+      puts result
       expect(result["errors"][0]["message"]).to eql("Unauthorized error")
     end
 
     it "should check #ready? when #current_user is present" do
+      puts result_1
       expect(result_1.dig('data', 'orderGenerator', 'number')).to eq(1)
     end
 
