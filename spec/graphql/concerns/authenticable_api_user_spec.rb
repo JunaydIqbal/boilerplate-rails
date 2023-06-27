@@ -2,33 +2,34 @@ require 'rails_helper'
 
 # Below class is used to test methods of AuthenticableApiUser module
 # require './spec/support/resources/order_generator'
-# A dummy class to test #execution_error
-class Order
-  include AuthenticableApiUser
-end
-
-# A dummy class to test GraphQL processes ..
-class OrderGenerator < GraphQL::Schema::Mutation
-  include AuthenticableApiUser
-
-  argument :number, Int
-
-  field :errors, [String]
-  field :number, Int
-
-  def resolve(number:)
-    { number: number }
-  end
-end
-
-# Register new mutation class inside MutationType
-module Types
-  class MutationType < Types::BaseObject
-    field :order_generator, mutation: OrderGenerator
-  end
-end
 
 RSpec.describe AuthenticableApiUser do
+  # A dummy class to test #execution_error
+  class Order
+    include AuthenticableApiUser
+  end
+
+  # A dummy class to test GraphQL processes ..
+  class OrderGenerator < GraphQL::Schema::Mutation
+    include AuthenticableApiUser
+
+    argument :number, Int
+
+    field :errors, [String]
+    field :number, Int
+
+    def resolve(number:)
+      { number: number }
+    end
+  end
+
+  # Register new mutation class inside MutationType
+  module Types
+    class MutationType < Types::BaseObject
+      field :order_generator, mutation: OrderGenerator
+    end
+  end
+
   let(:user) { create(:user) }
   let(:query) { 'mutation { orderGenerator( number: 1 ) { number } }' }
   let(:result) { GraphqlBoilerplateSchema.execute(query) }
