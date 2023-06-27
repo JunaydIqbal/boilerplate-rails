@@ -22,8 +22,13 @@ jobs:
           ruby-version: 3.2.2
       
       - name: Run Tests
-        env: 
-          DATABASE_URL: postgres//postgres:@localhost:5432/pathsync_development
+        env:
+          PG_DATABASE: postgres
+          PG_HOST: localhost
+          PG_PORT: 5432
+          PG_USER: postgres
+          PG_PASSWORD: postgres
+          RAILS_ENV: test
         run: |
           sudo apt install -yqq libpq-dev
           gem install bundler
