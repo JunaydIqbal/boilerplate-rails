@@ -9,9 +9,14 @@ on:
 jobs:
   test:
     services:
-      db:
+      postgres:
         image: postgres:12
         ports: ['5432:5432']
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: pathsync_test
+
     runs-on: ubuntu-latest
     
     steps:
@@ -22,13 +27,6 @@ jobs:
           ruby-version: 3.2.2
       
       - name: Run Tests
-        env:
-          PG_DATABASE: postgres
-          PG_HOST: localhost
-          PG_PORT: 5432
-          PG_USER: postgres
-          PG_PASSWORD: postgres
-          RAILS_ENV: test
         run: |
           sudo apt install -yqq libpq-dev
           gem install bundler
