@@ -2,6 +2,10 @@ require_relative "boot"
 
 require "rails/all"
 
+# Make graphiql route interface accessible by requiring sprockets/railtie
+# GraphQL frontend dependencies (application.css/application.js)
+require "sprockets/railtie"
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -24,5 +28,11 @@ module GraphqlBoilerplate
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Temporary cure for the error below:
+    # ActionView::Template::Error (Your application has sessions disabled. To write to the session you must first configure a session store):
+    config.session_store :cookie_store, key: '_interslice_session'
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use config.session_store, config.session_options
   end
 end
