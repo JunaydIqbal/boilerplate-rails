@@ -1,46 +1,27 @@
-# README
+# PathSync API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Codebase Setup
 
-Things you may want to cover:
+* Clone the project using Code dropdown
+* Run `bundle install` to get all gems working
+* Create or modify `database.yml` to suit your database environment
+* If `master.key` required to proceed further for setup, contact project administrator to get it
+* Setup db by running commands `rails db:create && rails db:migrate`
+* Run test suite by `rspec spec -f d` command. Make sure all tests are green
+* Start the server using `rails s`
+* To run sidekiq, use `bundle exec sidekiq` in a separate terminal window/tab
 
-* Ruby version
+## Endpoints Consumption
 
-* System dependencies
+* APIs are accessible under the route POST /graphql
+* Use Postman to fire up Queries and Mutations
+* Team shared Postman space have the neccessary documentation
 
-* Configuration
+## GraphQL API Mocker
 
-* Database creation
+There's a separate branch __mocking-graphql-ai__ which has `gem mock-graphql-ai` implementation. You can switch if you want to consume OpenAI gpt-3.5 turbo to generate mock responses for you.
 
-* Database initialization
+## PRs Follow-ups
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-# Instructions to enable Rubocop as Linter
-
-* Uncomment rubocop gems declaration from Gemfile
-
-* Create a file named .rubocop.yml in project directory with this config:
-
-require:
-  - rubocop
-  - rubocop-rails
-
-AllCops:
-  EnabledByDefault: true
-
-Style/Copyright:
-  Description: 'Include a copyright notice in each file before any code.'
-  Enabled: false
-  VersionAdded: '0.30'
-  Notice: '^Copyright (\(c\) )?2[0-9]{3} .+'
-  AutocorrectNotice: ''
-
-* Enable rubocop extension in your code editor to pick real time code offenses
+* Its mandatory to add test cases for newly added features and changes in PRs
+* GitHub Actions are enabled for Test Suite automation, PRs will not get merged until the associated hook turns green
