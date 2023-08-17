@@ -15,9 +15,12 @@ development:
 test:
   <<: *default
   database: pathsync_test
+  host: localhost
+  username: postgres
+  password: postgres
 
 production:
   <<: *default
   database: pathsync_production
-  username: moiz
+  username: pathsync
   password: <%= ENV['FREELANCE_DATABASE_PASSWORD'] %>
