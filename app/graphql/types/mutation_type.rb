@@ -11,6 +11,9 @@ module Types
     field :resend_invitation, mutation: Mutations::Users::ResendInvitation
     field :set_password, mutation: Mutations::Users::SetPassword
     field :send_reset_password_instructions, mutation: Mutations::Users::SendResetPasswordInstructions
+
+    # Admin fields
+    field :impersonate_as_user, mutation: Mutations::Admins::ImpersonateAsUser
     
     # Mutations for RSpec tests
     field :order_generator, mutation: Mutations::Support::OrderGenerator if Rails.env.test?
