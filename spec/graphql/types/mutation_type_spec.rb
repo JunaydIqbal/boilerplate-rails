@@ -6,7 +6,8 @@ RSpec.describe Types::MutationType do
     {
       'registerUser' => Mutations::Users::RegisterUser,
       'loginUser' => Mutations::Users::LoginUser,
-      'updateUser' => Mutations::Users::UpdateUser
+      'updateUser' => Mutations::Users::UpdateUser,
+      'impersonateAsUser' => Mutations::Admins::ImpersonateAsUser
     }
   end
   
