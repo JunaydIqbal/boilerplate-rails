@@ -16,13 +16,13 @@ RSpec.describe Types::Admins::DashboardAnalytics do
       expect(new_users_count_field.type.of_type).to eq(GraphQL::Types::Int)
       expect(new_users_count_field.type.class).to eq(GraphQL::Schema::NonNull)
 
-      expect(users_count_field.type).to eq(GraphQL::Types::Int)
+      expect(users_count_field.type.of_type).to eq(GraphQL::Types::Int)
       expect(users_count_field.type.class).to eq(GraphQL::Schema::NonNull)
 
-      expect(active_users_count_field.type).to eq(GraphQL::Types::Int)
+      expect(active_users_count_field.type.of_type).to eq(GraphQL::Types::Int)
       expect(active_users_count_field.type.class).to eq(GraphQL::Schema::NonNull)
 
-      expect(revoked_users_count_field.type).to eq(GraphQL::Types::Int)
+      expect(revoked_users_count_field.type.of_type).to eq(GraphQL::Types::Int)
       expect(revoked_users_count_field.type.class).to eq(GraphQL::Schema::NonNull)
     end
   end
