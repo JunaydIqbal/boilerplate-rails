@@ -7,6 +7,9 @@ module Types
     field :all_users, resolver: Queries::Users::AllUsers
     field :fetch_user, resolver: Queries::Users::FetchUser
 
+    # Admin fields
+    field :admin_dashboard_analytics, resolver: Queries::Admins::AdminDashboardAnalytics
+
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
