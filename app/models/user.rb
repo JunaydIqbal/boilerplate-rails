@@ -4,11 +4,13 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :invitable
+         :recoverable, :rememberable, :validatable, :invitable, :trackable
 
   enum role: %i[admin user]
 
   has_one_attached :image
+
+  scope :active, -> { where(deleted: false) }
 
   def self.search(query)
     if query.present?
