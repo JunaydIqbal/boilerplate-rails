@@ -1,5 +1,5 @@
 module Queries
-  module Users
+  module Admins
     class AllUsers < Queries::BaseQuery
       include AuthenticableApiUser
       include AuthenticateAdmin
