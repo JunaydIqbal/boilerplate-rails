@@ -15,8 +15,8 @@ class User < ApplicationRecord
   def self.search(query)
     if query.present?
       where("
-        email ILIKE? OR first_name ILIKE? OR last_name ILIKE? OR phone_no ILIKE?", 
-        "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%"
+        email ILIKE? OR first_name ILIKE? OR last_name ILIKE? OR full_name ILIKE? OR phone_no ILIKE?", 
+        "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%"
       ).limit(10)
     else
       all
