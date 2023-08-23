@@ -6,7 +6,7 @@ module Types
       field :full_name, String, null: true
       field :first_name, String, null: false
       field :last_name, String, null: false
-      field :phone_no, String, null: false
+      field :phone_no, String, null: true
       field :role, String, null: false
       field :image_url, String, null: true
       field :revoke_access, Boolean, null: false
