@@ -4,6 +4,7 @@ module Types
     field :register_user, mutation: Mutations::Users::RegisterUser
     field :login_user, mutation: Mutations::Users::LoginUser
     field :update_user, mutation: Mutations::Users::UpdateUser
+    field :update_password, mutation: Mutations::Users::UpdatePassword
     field :destroy_user, mutation: Mutations::Users::DestroyUser
     
     field :create_invitation, mutation: Mutations::Users::CreateInvitation
