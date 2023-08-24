@@ -17,15 +17,15 @@ module Admins
 
     def new_users_count
       # Users created in last 30 days
-      User.active.where(created_at: (30.days.ago.to_date..Date.today.end_of_day)).count
+      User.user.active.where(created_at: (30.days.ago.to_date..Date.today.end_of_day)).count
     end
 
     def users_count
-      User.count
+      User.user.count
     end
 
     def active_users_count
-      User.active.where("last_sign_in_at > ?", 7.days.ago.to_datetime).count
+      User.user.active.where("last_sign_in_at > ?", 7.days.ago.to_datetime).count
     end
 
     def revoked_users_count
