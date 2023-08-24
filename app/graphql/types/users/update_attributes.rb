@@ -7,6 +7,7 @@ module Types
         }
       }
       argument :full_name, String, required: false
+      argument :phone_no, String, required: false
       argument :password, String, required: false
       argument :password_confirmation, String, required: false
     end
