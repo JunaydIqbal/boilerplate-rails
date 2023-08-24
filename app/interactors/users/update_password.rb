@@ -22,7 +22,7 @@ module Users
       if @user.update(password: user_params[:password], password_confirmation: user_params[:password_confirmation])
         context.response = true
       else
-        context.fail!(error: @user.errors.full_messages.join(", "))
+        raise @user.errors.full_messages.join(", ")
       end
     end
   end
