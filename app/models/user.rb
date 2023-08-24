@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   has_one_attached :image
 
+  default_scope { order(created_at: :desc) }
   scope :active, -> { where(deleted: false) }
 
   def self.search(query)
