@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:3000", "http://127.0.0.1:3000" , "https://your-react-app-url"
+    origins "http://localhost:3000", "http://127.0.0.1:3000" , "https://pathsync-staging-0443b4dbcb69.herokuapp.com"
 
     resource "*",
       headers: :any,
