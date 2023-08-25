@@ -8,10 +8,10 @@ module Mutations
 
       type Types::Users::ObjectType
 
-      def resolve(**params)
+      def resolve(access_attributes:)
         authenticate_admin!
 
-        update_user(params)
+        update_user(access_attributes)
       rescue ActiveRecord::RecordNotFound,
              StandardError => e
         execution_error(message: e.message)
@@ -19,9 +19,11 @@ module Mutations
       
       private
 
-        def update_user(params)
-          user = User.find(params[:access_attributes][:user_id])
-          user.update(params[:access_attributes].to_h.except(:user_id))
+        def update_user(access_attributes)
+          user = User.find(access_attributes[:user_id])
+          update_params = access_attributes.instance_variable_get(:@ruby_style_hash).except(:user_id)
+
+          user.update(update_params)
           user
         end
     end
