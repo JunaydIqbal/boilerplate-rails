@@ -3,13 +3,9 @@ module Users
     def call
       @user = context.current_user
       
-      if @user.valid_password?(user_params[:current_password])
-        update_password
-      else
-        raise "Your current password is incorrect!"
-      end
-    rescue => e
-      context.fail!(error: e.message)
+      @user.valid_password?(user_params[:current_password]) ?
+        update_password :
+        context.fail!(error: "Your current password is incorrect!")
     end
     
     private
@@ -22,7 +18,7 @@ module Users
       if @user.update(password: user_params[:password], password_confirmation: user_params[:password_confirmation])
         context.response = true
       else
-        raise @user.errors.full_messages.join(", ")
+        context.fail!(error: @user.errors.full_messages.join(", "))
       end
     end
   end
