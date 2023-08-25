@@ -6,7 +6,7 @@ module Mutations
 
       argument :access_attributes, Types::Users::AccessAttributes, required: true
 
-      type Types::Users::ObjectType
+      type Types::Users::ObjectType, null: false
 
       def resolve(access_attributes:)
         authenticate_admin!
