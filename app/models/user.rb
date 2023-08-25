@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_one_attached :image
 
   default_scope { order(created_at: :desc) }
-  scope :active, -> { where(deleted: false) }
+  scope :active, -> { where(deleted: false, revoke_access: false) }
 
   def self.search(query)
     if query.present?
