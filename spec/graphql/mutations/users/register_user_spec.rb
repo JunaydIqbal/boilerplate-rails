@@ -35,6 +35,7 @@ RSpec.describe Mutations::Users::RegisterUser do
               password: "admin123",
               passwordConfirmation: "admin123",
               rememberMe: false
+              termsAndConditions: true
             }
           }
         ) {

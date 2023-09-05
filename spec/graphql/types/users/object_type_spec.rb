@@ -4,7 +4,7 @@ RSpec.describe Types::Users::ObjectType do
   
   context "Fields" do
     it "should validate nullability and types" do
-      %w(id email firstName lastName phoneNo role imageUrl).each do |attr|
+      %w(id email firstName lastName role imageUrl).each do |attr|
         expect(described_class.fields).to include(attr)
         
         if attr == "imageUrl"
