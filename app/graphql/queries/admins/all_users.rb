@@ -1,7 +1,8 @@
 module Queries
-  module Users
+  module Admins
     class AllUsers < Queries::BaseQuery
       include AuthenticableApiUser
+      include AuthenticateAdmin
 
       argument :skip_admin, Boolean, required: true
       argument :filter, Types::Filters::UserAttributes, required: false
@@ -9,6 +10,8 @@ module Queries
       type Types::Users::ObjectType.connection_type, null: true
 
       def resolve(**params)
+        authenticate_admin!
+        
         users = User.search(params.dig(:filter, :keyword))
         params[:skip_admin] ? users.user : users
       rescue => e
