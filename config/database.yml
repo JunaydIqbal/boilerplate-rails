@@ -4,23 +4,23 @@ default: &default
   template: template0
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   port: 5432
-  username: moiz
-  password: 
+  username: postgres
+  password: postgres
 
 
 development:
   <<: *default
-  database: pathsync_development
+  database: hospitality_development
 
 test:
   <<: *default
-  database: pathsync_test
+  database: hospitality_test
   host: localhost
   username: postgres
   password: postgres
 
 production:
   <<: *default
-  database: pathsync_production
-  username: pathsync
+  database: hospitality_production
+  username: hospitality
   password: <%= ENV['FREELANCE_DATABASE_PASSWORD'] %>
