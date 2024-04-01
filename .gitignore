@@ -34,4 +34,4 @@
 
 # Ignore code coverage reports by simplecov gem
 /coverage
-# config/database.yml
+# config/database.ymlconfig/database.yml
