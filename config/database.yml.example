@@ -1,0 +1,26 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  template: template0
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  port: 5432
+  username: postgres
+  password: postgres
+
+
+development:
+  <<: *default
+  database: hospitality_development
+
+test:
+  <<: *default
+  database: hospitality_test
+  host: localhost
+  username: postgres
+  password: postgres
+
+production:
+  <<: *default
+  database: hospitality_production
+  username: hospitality
+  password: <%= ENV['FREELANCE_DATABASE_PASSWORD'] %>
