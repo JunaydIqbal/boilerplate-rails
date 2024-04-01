@@ -10,17 +10,17 @@ default: &default
 
 development:
   <<: *default
-  database: hospitality_development
+  database: hospitality_inspection_development
 
 test:
   <<: *default
-  database: hospitality_test
+  database: hospitality_inspection_test
   host: localhost
   username: postgres
   password: postgres
 
 production:
   <<: *default
-  database: hospitality_production
-  username: hospitality
+  database: hospitality_inspection_production
+  username: hospitality_inspection
   password: <%= ENV['FREELANCE_DATABASE_PASSWORD'] %>
