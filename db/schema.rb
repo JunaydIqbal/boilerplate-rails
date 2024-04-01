@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_22_112352) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_01_052317) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,15 +42,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_22_112352) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "mock_graphql_responses", force: :cascade do |t|
-    t.string "name"
-    t.integer "req_type", default: 0, null: false
-    t.integer "output_mode", default: 0, null: false
-    t.jsonb "data", default: {}, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -60,7 +51,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_22_112352) do
     t.string "first_name"
     t.string "last_name"
     t.string "phone_no"
-    t.integer "role", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "deleted", default: false
@@ -79,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_22_112352) do
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.boolean "terms_and_conditions", default: false
+    t.string "type"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
