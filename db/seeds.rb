@@ -7,24 +7,46 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-admin = User.create(
-  full_name: "Admin 1", 
+admin = Users::Admin.create(
+  first_name: "Admin FirstName",
+  last_name: "LastName",
   email: "admin@test.com",
   password: "admin123",
   password_confirmation: "admin123", 
-  phone_no: "+12334432493", 
-  role: "admin"
+  phone_no: "+12334432493"
 )
 
 puts "*** Admin with email: #{admin.email} created! ***"; puts
 
-user = User.create(
-  full_name: "User 1", 
+user = Users::Assessor.create(
+  first_name: "Assessor firstname",
+  last_name: "LastName",
   email: "user@test.com",
   password: "admin123",
   password_confirmation: "admin123", 
-  phone_no: "+12334432493", 
-  role: "user"
+  phone_no: "+12334432493"
 )
 
-puts "*** User with email: #{user.email} created! ***"
+puts "*** Assessor with email: #{user.email} created! ***"
+
+client = Users::Client.create(
+  first_name: "Client firstname",
+  last_name: "LastName",
+  email: "client@test.com",
+  password: "admin123",
+  password_confirmation: "admin123", 
+  phone_no: "+12334432493"
+)
+
+puts "*** Client with email: #{client.email} created! ***"
+
+super_admin = Users::SuperAdmin.create(
+  first_name: "SuperAdmin firstname",
+  last_name: "LastName",
+  email: "super@test.com",
+  password: "admin123",
+  password_confirmation: "admin123", 
+  phone_no: "+12334432493"
+)
+
+puts "*** Client with email: #{super_admin.email} created! ***"
