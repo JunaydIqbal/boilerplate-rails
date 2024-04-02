@@ -9,7 +9,7 @@ class User < ApplicationRecord
   USERS_TYPES = %w(Users::SuperAdmin Users::Admin Users::Assessor Users::Client)
 
   validates_inclusion_of :type, in: USERS_TYPES
-  enum invitation_status: %i[pending accept declined]
+  enum invitation_status: %i[pending accepted declined]
 
   has_one_attached :profile_picture
 

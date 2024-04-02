@@ -1,9 +1,9 @@
 module Users
   class Destroy < BaseInteractor
     def call
-      @user = User.find_by(id: context.user_id)
+      @user = User.active.find_by(id: context.user_id)
       soft_destroy!
-      context.user = user
+      context.user = @user
     rescue => e
       context.fail!(error: e.message)
     end

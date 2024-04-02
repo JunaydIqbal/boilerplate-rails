@@ -11,6 +11,7 @@ module Types
       field :revoke_access, Boolean, null: false
       field :deleted, Boolean, null: false
       field :terms_and_conditions, Boolean, null: false
+      field :invitation_status, String, null: true
 
       field :invitation_accepted, Boolean, null: false
       field :raw_invitation_token, String, null: false
@@ -21,6 +22,10 @@ module Types
 
       def raw_invitation_token
         object.raw_invitation_token
+      end
+
+      def type
+        Resolvers::UserResolvers.new(object).type
       end
 
       def profile_picture
