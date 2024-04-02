@@ -10,7 +10,7 @@ module Mutations
       def resolve(**params)
         result = update_user(params)
 
-        result.success? ? result.user : execution_error(message: result.error)
+        result.success? ? result.user : interactors_execution_error(result: result)
       end
 
       private

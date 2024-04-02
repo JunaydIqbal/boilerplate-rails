@@ -35,7 +35,8 @@ module Users
       end
 
       def update_user!
-        if current_user.type == "Users::Admin" && user_id.present?
+        if (["Users::Admin", "Users::SuperAdmin"].include? current_user.type) && user_id.present?
+          validate_role_update_permission!
           @user = fetch_user
           @user.update!(update_manipulate_access_attrs)
         else
@@ -47,7 +48,7 @@ module Users
       end
 
       def identify_role
-        case manipulate_access_attrs.dig(:role)
+        case manipulate_access_attrs.dig(:type)
         when "ADMIN"
           "Users::Admin"
         when "ASSESSOR"
@@ -60,9 +61,14 @@ module Users
       def update_manipulate_access_attrs
         manipulate_access_attrs.merge(
           {
-            role: identify_role
+            type: identify_role
           }
         )
       end
+
+      def validate_role_update_permission!
+        raise "You cannot change a user's role to 'Admin'. Only super admins can do this." if current_user.type == "Users::Admin" && identify_role == "Users::Admin"
+      end
+
   end
 end

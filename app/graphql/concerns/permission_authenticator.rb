@@ -1,12 +1,13 @@
 module PermissionAuthenticator
   extend ActiveSupport::Concern
 
-  def authenticate_super_admin!
-    raise execution_error(message: "Access Denied!") unless context[:current_user].is_a?(Users::SuperAdmin)
-  end
+  # for super-admin
+  # def authenticate_super_admin!
+  #   raise execution_error(message: "Access Denied!") unless context[:current_user].is_a?(Users::SuperAdmin)
+  # end
 
   def authenticate_admin!
-    raise execution_error(message: "Access Denied!") unless context[:current_user].is_a?(Users::Admin)
+    raise execution_error(message: "Access Denied!") unless ([Users::Admin, Users::SuperAdmin].include? context[:current_user].class)
   end
 
   def authenticate_assessor!
