@@ -3,7 +3,7 @@ module Mutations
     class UpdateUser < BaseMutation
       include AuthenticableApiUser
       
-      argument :profile_attributes, Types::Users::ProfileAttributes, required: true
+      argument :user_attributes, Types::Users::UpdateAttributes, required: true
 
       type Types::Users::ObjectType
 
@@ -17,8 +17,9 @@ module Mutations
 
         def update_user(params)
           ::Users::Update.call(
-            user_id: params[:profile_attributes][:id], 
-            user_params: params.dig(:profile_attributes).to_h.except(:id)
+            user_id: params[:user_attributes][:id], 
+            user_params: params.dig(:user_attributes).to_h.except(:id),
+            current_user: context[:current_user]
           )
         end
     end
