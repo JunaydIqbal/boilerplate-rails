@@ -1,7 +1,7 @@
 module Types
   class MutationType < Types::BaseObject
     # User fields
-    field :register_user, mutation: Mutations::Users::RegisterUser
+    # field :register_user, mutation: Mutations::Users::RegisterUser # our app is not supported to sign up functionality
     field :login_user, mutation: Mutations::Users::LoginUser
     field :update_user, mutation: Mutations::Users::UpdateUser
     field :update_password, mutation: Mutations::Users::UpdatePassword

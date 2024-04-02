@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   validates_inclusion_of :type, in: USERS_TYPES
 
-  has_one_attached :image
+  has_one_attached :profile_picture
 
   default_scope { order(created_at: :desc) }
   scope :active, -> { where(deleted: false, revoke_access: false) }
