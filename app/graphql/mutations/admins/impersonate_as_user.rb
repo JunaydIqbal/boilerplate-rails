@@ -2,7 +2,7 @@ module Mutations
   module Admins
     class ImpersonateAsUser < BaseMutation
       include AuthenticableApiUser
-      include AuthenticateAdmin
+      include PermissionAuthenticator
 
       argument :user_id, ID, required: true
 
