@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :invitable, :trackable
 
-  USERS_TYPES = %w(Users::Admin Users::Evaluator Users::Customer)
+  USERS_TYPES = %w(Users::SuperAdmin Users::Admin Users::Assessor Users::Client)
 
   validates_inclusion_of :type, in: USERS_TYPES
 
