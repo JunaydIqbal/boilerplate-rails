@@ -2,7 +2,7 @@ module Mutations
   module Admins
     class ModifyAccessUser < BaseMutation
       include AuthenticableApiUser
-      include AuthenticateAdmin
+      include PermissionAuthenticator
 
       argument :access_attributes, Types::Users::AccessAttributes, required: true
 

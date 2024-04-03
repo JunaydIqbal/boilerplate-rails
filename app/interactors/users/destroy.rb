@@ -1,12 +1,17 @@
 module Users
   class Destroy < BaseInteractor
     def call
-      user = User.find_by(id: context.user_id)
-      user.destroy # You can replace this with soft destroy logic
-      # user.update(deleted: true)
-      context.user = user
+      @user = User.active.find_by(id: context.user_id)
+      soft_destroy!
+      context.user = @user
     rescue => e
       context.fail!(error: e.message)
     end
+
+    private
+
+      def soft_destroy!
+        @user.update(deleted: true)
+      end
   end
 end

@@ -2,7 +2,7 @@ module Queries
   module Admins
     class AllUsers < Queries::BaseQuery
       include AuthenticableApiUser
-      include AuthenticateAdmin
+      include PermissionAuthenticator
 
       argument :skip_admin, Boolean, required: true
       argument :filter, Types::Filters::UserAttributes, required: false

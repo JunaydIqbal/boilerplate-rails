@@ -2,7 +2,7 @@ module Queries
   module Admins
     class AdminDashboardAnalytics < Queries::BaseQuery
       include AuthenticableApiUser
-      include AuthenticateAdmin
+      include PermissionAuthenticator
 
       type Types::Admins::DashboardAnalytics, null: false
 

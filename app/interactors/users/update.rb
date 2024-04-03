@@ -1,41 +1,80 @@
 module Users
   class Update < BaseInteractor
-    
+    before :fetch_user
+
     def call
-      @user = User.find(context.user_id)
-      @user.image = generate_blob! if context.user_params[:image].present?
-      @user.update!(context.user_params.except(:image))
-      # Need to review the line of code below ..
-      # authenticated_via_old_password? ? context.fail!(error: "Invalid operation: The new password cannot be the same as the old password") : @user.update!(context.user_params.except(:image))
-      # if @user.created_by_invite? && !@user.invitation_accepted?
-      #   send_email_invitation!
-      # end
-      context.user = @user
+      update_user!
+      context.user = user
     rescue ActiveRecord::RecordNotFound => e
       context.fail!(error: e.message)
     end
-    
+
     private
-    
-      # def send_email_invitation!
-      #   @user.deliver_invitation
-      # end
-      
-      # def new_password_provided?
-      #   context.user_params[:password]
-      # end
-      
-      def generate_blob!
-        file = context.user_params[:image] 
-        ActiveStorage::Blob.create_and_upload!(
-          io: file,
-          filename: file.original_filename,
-          content_type: file.content_type
-        )
+
+      attr_reader :user
+
+      def fetch_user
+        @user = context.user_id.present? ? User.active.find(context.user_id) : current_user
       end
 
-      # def authenticated_via_old_password?
-      #   @user.valid_password? (new_password_provided?) if new_password_provided?
-      # end
+      def update_user!
+        user_attrs = determine_user_attributes
+        user.update!(user_attrs)
+        update_profile_picture_if_necessary(user_attrs)
+      end
+
+      def determine_user_attributes
+        if admin_or_superadmin? && context.user_id.present?
+          validate_role_update_permission!
+          access_or_profile_attributes
+        else
+          context.user_params.dig(:update_profile).to_h
+        end
+      end
+
+      def access_or_profile_attributes
+        if manipulate_access?
+          update_manipulate_access_attrs
+        else
+          context.user_params.dig(:update_profile).to_h
+        end
+      end
+
+      def manipulate_access?
+        context.user_params.dig(:manipulate_access).present?
+      end
+
+      def update_manipulate_access_attrs
+        context.user_params.dig(:manipulate_access).to_h.merge(type: identify_role)
+      end
+
+      def update_profile_picture_if_necessary(attrs)
+        return unless attrs.key?(:profile_picture)
+
+        user.profile_picture = generate_blob!(attrs[:profile_picture])
+      end
+
+      def identify_role
+        role_type = context.user_params.dig(:manipulate_access, :type)
+        case role_type
+        when "ADMIN" then "Users::Admin"
+        when "ASSESSOR" then "Users::Assessor"
+        when "CLIENT" then "Users::Client"
+        end
+      end
+
+      def validate_role_update_permission!
+        if current_user.type == "Users::Admin" && identify_role == "Users::Admin"
+          raise "You cannot change a user's role to 'Admin'. Only super admins can do this."
+        end
+      end
+
+      def admin_or_superadmin?
+        ["Users::Admin", "Users::SuperAdmin"].include? current_user.type
+      end
+
+      def current_user
+        context.current_user
+      end
   end
 end

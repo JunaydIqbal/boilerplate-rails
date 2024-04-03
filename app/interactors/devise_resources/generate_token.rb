@@ -29,7 +29,7 @@ module DeviseResources
         {
           sub: resource_id,
           exp: expiry_time.to_i,
-          role: resource.role # Adjust this logic for multiple devise models -> resource.is_a?(Customer) ? "customer" : resource.role
+          type: resource.type # Adjust this logic for multiple devise models -> resource.is_a?(Customer) ? "customer" : resource.role
         }
       end
   end

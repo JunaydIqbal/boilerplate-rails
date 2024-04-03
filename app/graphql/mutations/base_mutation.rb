@@ -6,5 +6,6 @@ module Mutations
     object_class Types::BaseObject
 
     include ExecutionErrorResponder
+    include InteractorErrorHandler
   end
 end
