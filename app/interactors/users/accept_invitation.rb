@@ -4,7 +4,8 @@ module Users
       @user = User.accept_invitation!(
         invitation_token: user_params[:token],
         password: user_params[:password],
-        password_confirmation: user_params[:password_confirmation]
+        password_confirmation: user_params[:password_confirmation],
+        invitation_status: "accepted"
       )
       return_user_based_errors unless @user.errors.blank?
       check_for_invitation_acceptance

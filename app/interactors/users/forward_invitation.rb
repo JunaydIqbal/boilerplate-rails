@@ -3,6 +3,9 @@ module Users
     def call
       check_for_user_existence!
       @user = create_user_invitation
+      if @user.persisted?
+        update_status!
+      end
       context.user = @user
     rescue => e
       context.fail!(error: e.message)
@@ -11,7 +14,22 @@ module Users
     private
 
       def user_params
-        context.user_params
+        context.user_params.to_h
+      end
+
+      def invited_by
+        context.current_user
+      end
+
+      def user_klass
+        case user_params.dig(:type)
+        when "ADMIN"
+          Users::Admin
+        when "ASSESSOR"
+          Users::Assessor
+        when "CLIENT"
+          Users::Client
+        end
       end
 
       def user_already_present?
@@ -23,11 +41,11 @@ module Users
       end
 
       def create_user_invitation
-        User.invite!(user_params) do |u|
-          u.role = 'user'
-          # This will skip sending email invitation
-          # u.skip_invitation = true
-        end
+        user_klass.invite!(user_params.except(:type), invited_by)
+      end
+
+      def update_status!
+        @user.update!(invitation_status: "pending")
       end
   end
 end
