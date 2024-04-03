@@ -3,9 +3,7 @@ module Users
     def call
       check_for_user_existence!
       @user = create_user_invitation
-      if @user.persisted?
-        update_status!
-      end
+      update_status! if @user.persisted?
       context.user = @user
     rescue => e
       context.fail!(error: e.message)
