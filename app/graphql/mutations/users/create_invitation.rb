@@ -12,7 +12,7 @@ module Mutations
         authenticate_admin!
         result = invite_user(params)
 
-        result.success? ? result.user : execution_error(message: result.error)
+        result.success? ? result.user : interactors_execution_error(result: result)
       end
 
       private
