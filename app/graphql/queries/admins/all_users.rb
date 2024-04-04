@@ -8,7 +8,7 @@ module Queries
       argument :filter, Types::Filters::FilterAttributes, required: false
       argument :page, Integer, required: false, default_value: 1
       argument :per_page, Integer, required: false, default_value: 10
-      argument :status, Types::Users::StatusEnum, required: false, default_value: "ALL_USERS"
+      argument :status, Types::Users::StatusEnum, required: false, default_value: "ALL"
 
       type Types::Users::UsersPagination, null: false
 

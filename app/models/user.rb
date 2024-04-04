@@ -16,7 +16,6 @@ class User < ApplicationRecord
   default_scope { where(deleted: false).order(created_at: :desc) }
   scope :active, -> { where(deleted: false, revoke_access: false).order(created_at: :desc) }
   scope :inactive, -> { where(deleted: false, revoke_access: true).order(created_at: :desc) }
-  scope :all_users, -> { where(deleted: false).order(created_at: :desc) }
   scope :deleted, -> { where(deleted: true).order(created_at: :desc) }
 
   USERS_TYPES.each do |type|
