@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   has_one_attached :profile_picture
 
-  default_scope { order(created_at: :desc) }
+  default_scope { where(deleted: false).order(created_at: :desc) }
   scope :active, -> { where(deleted: false, revoke_access: false) }
 
   USERS_TYPES.each do |type|

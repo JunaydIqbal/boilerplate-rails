@@ -14,7 +14,7 @@ module Users
       attr_reader :user
 
       def fetch_user
-        @user = context.user_id.present? ? User.active.find(context.user_id) : current_user
+        @user = context.user_id.present? ? User.find(context.user_id) : current_user
       end
 
       def update_user!

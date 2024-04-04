@@ -20,7 +20,7 @@ module DeviseResources
         # @resource = context.klass == "Customer" ? 
         #   Customer.find_by(email: context.email) :
         #   User.find_by(email: context.email)
-        User.active.find_by(email: context.resource_params[:email])
+        User.find_by(email: context.resource_params[:email])
       end
 
       def suspension_check_needed?
