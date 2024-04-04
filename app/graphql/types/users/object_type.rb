@@ -3,8 +3,8 @@ module Types
     class ObjectType < Types::BaseObject
       field :id, ID, null: false
       field :email, String, null: false
-      field :first_name, String, null: false
-      field :last_name, String, null: false
+      field :first_name, String, null: true
+      field :last_name, String, null: true
       field :phone_no, String, null: true
       field :type, String, null: false
       field :profile_picture, Types::Shared::ImageType, null: true
@@ -15,6 +15,8 @@ module Types
 
       field :invitation_accepted, Boolean, null: false
       field :raw_invitation_token, String, null: false
+      field :invited_by, ObjectType, null: true
+      field :invitees, [ObjectType], null: true
 
       def invitation_accepted
         object.invitation_accepted?
