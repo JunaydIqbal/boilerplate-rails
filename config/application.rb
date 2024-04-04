@@ -4,7 +4,7 @@ require "rails/all"
 
 # Make graphiql route interface accessible by requiring sprockets/railtie
 # GraphQL frontend dependencies (application.css/application.js)
-require "sprockets/railtie"
+require "sprockets/railtie" if Rails.env.development?
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
