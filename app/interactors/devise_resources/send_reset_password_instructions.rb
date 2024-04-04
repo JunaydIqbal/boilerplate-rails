@@ -5,7 +5,7 @@ module DeviseResources
       # Use conditional logic if you have multiple devise models
       # resource = context.klass == "Customer" ? 
       #     Customer.find_by(email: context.email) :
-      resource = User.find_by(email: context.email)
+      resource = User.active.find_by(email: context.email)
       
       if resource.present?
         resource.send_reset_password_instructions
