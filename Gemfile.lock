@@ -126,6 +126,18 @@ GEM
     interactor (3.1.2)
     jmespath (1.6.2)
     jwt (2.7.1)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     launchy (2.5.2)
       addressable (~> 2.8)
     letter_opener (1.8.1)
@@ -284,6 +296,7 @@ DEPENDENCIES
   graphql
   interactor (~> 3.0)
   jwt
+  kaminari
   letter_opener_web (~> 2.0)
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)

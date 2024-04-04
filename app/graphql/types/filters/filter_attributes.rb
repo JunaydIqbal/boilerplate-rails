@@ -1,6 +1,6 @@
 module Types
   module Filters
-    class UserAttributes < Types::BaseInputObject
+    class FilterAttributes < Types::BaseInputObject
       argument :keyword, String, required: false
     end
   end
