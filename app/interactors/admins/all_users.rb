@@ -5,7 +5,7 @@ module Admins
     def call
       @users = get_users
       filter_by_status! if params.dig(:status).present?
-      paginate_records(@users)
+      paginate(@users)
       context.all_users = users_data_in_format
     rescue => e
       context.fail!(error: e.message)
